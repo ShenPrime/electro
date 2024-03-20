@@ -1,0 +1,62 @@
+<h1>Total Data: <%= @entry_count %></h1>
+<form phx-submit="search">
+  <div :for={column <- @columns} class="inline">
+    <input
+      type="radio"
+      name="column"
+      id={column.name}
+      value={column.name}
+      checked={column.name == @checked}
+      phx-click="get-count"
+    />
+    <label for={column.name}><%= column.label %></label>
+  </div>
+  <input
+    type="text"
+    name="question"
+    value={@question}
+    placeholder="search the db..."
+    autofocus
+    autocomplete="off"
+    readonly={@loading}
+  />
+  <button>
+    search
+  </button>
+</form>
+
+<div :if={@loading}>Loading...</div>
+<div :if={length(@answers) > 0}>
+  <h3 :if={@result_count > 0}>Found <%= @result_count %> Results</h3>
+  <ul class="p-4">
+    <li
+      :for={answer <- @answers}
+      class="rounded-md shadow-lg border-solid flex flex-col justify-center content-center text-center bg-slate-900 p-4 m-4"
+    >
+      <h1 class="font-bold">Swedish Question:</h1>
+      <p>
+        <%= answer.swedish_question %>
+      </p>
+      <h1>Arabic Translate</h1>
+      <p>
+        <%= answer.arabic_translate %>
+      </p>
+      <h1>Swedish Answer:</h1>
+      <p>
+        <%= answer.arabic_answer %>
+      </p>
+      <h1>Subject:</h1>
+      <p>
+        <%= answer.subject %>
+      </p>
+      <h1>Notes:</h1>
+      <p>
+        <%= answer.note %>
+      </p>
+      <h1>Image</h1>
+      <p>
+        <%= answer.pic %>
+      </p>
+    </li>
+  </ul>
+</div>
