@@ -1,7 +1,15 @@
-<h2 class="font-bold text-center m-4">Total Data: <%= @entry_count %></h2>
-<form class="flex flex-col justify-center" phx-submit="search" phx-change="suggest">
-  <div class="flex flex-row gap-4">
-    <div :for={column <- @columns} class="m-2">
+<h2 class="text-center mb-4">
+  Total Data:
+  <span class="text-sky-400 font-normal">
+    <%= @entry_count %>
+  </span>
+</h2>
+<form class="flex flex-col justify-center" phx-submit="search">
+  <div class="flex justify-between flex-row">
+    <div
+      :for={column <- @columns}
+      class="text-sky-400 mb-2 max-w-24 flex items-center justify-between"
+    >
       <input
         type="radio"
         name="column"
@@ -10,7 +18,7 @@
         checked={column.name == @checked}
         phx-click="get-count"
       />
-      <label for={column.name}><%= column.label %></label>
+      <label class="mr-4 ml-2 leading-5" for={column.name}><%= column.label %></label>
     </div>
   </div>
   <input
@@ -23,30 +31,46 @@
     readonly={@loading}
     class="rounded-md shadow-md m-2 text-black"
   />
-  <button class="rounded-sm border-solid p-2 m-2 bg-slate-950 hover:bg-slate-700">search</button>
+  <button class="rounded-md self-center w-96 border border-solid p-2 m-2 bg-slate-950 hover:bg-slate-800">
+    search
+  </button>
 </form>
 <div :if={@loading} class="text-center">Loading...</div>
+<div :if={@no_results} class="text-center">No Results found!</div>
 <div :if={length(@answers) > 0}>
   <h3 :if={@result_count > 0} class="text-center font-bold">
-    Found <%= @result_count %> Results
+    Found
+    <span class="text-sky-400">
+      <%= @result_count %>
+    </span>
+    Results
   </h3>
   <ul class="p-4">
     <li
       :for={answer <- @answers}
-      class="rounded-md shadow-lg border-solid flex flex-col justify-center content-center text-center bg-slate-900 p-4 m-4"
+      class="rounded-md shadow-lg border-solid flex flex-col justify-center content-center text-center bg-slate-950 p-4 m-4"
     >
-      <h2 class="font-bold">Swedish Question:</h2>
-      <p class="m-1"><%= answer.swedish_question %></p>
-      <h2 class="font-bold">Arabic Translate</h2>
-      <p class="m-1"><%= answer.arabic_translate %></p>
-      <h2 class="font-bold">Swedish Answer:</h2>
-      <p class="m-1"><%= answer.arabic_answer %></p>
-      <h2 class="font-bold">Subject:</h2>
-      <p class="m-1"><%= answer.subject %></p>
-      <h2 class="font-bold">Notes:</h2>
-      <p class="m-1"><%= answer.note %></p>
-      <h2 class="font-bold">Image</h2>
-      <p class="m-1"><%= answer.pic %></p>
+      <.copy_button
+        column="swedish_question"
+        label="Swedish Question"
+        id={answer.id}
+        content={answer.swedish_question}
+      />
+      <.copy_button
+        column="arabic_translate"
+        label="Arabic Translate"
+        id={answer.id}
+        content={answer.arabic_translate}
+      />
+      <.copy_button
+        column="swedish_answer"
+        label="Swedish Answer"
+        id={answer.id}
+        content={answer.swedish_answer}
+      />
+      <.copy_button column="subject" label="Subject" id={answer.id} content={answer.subject} />
+      <.copy_button column="note" label="Notes" id={answer.id} content={answer.note} />
+      <.copy_button column="pic" label="Image" id={answer.id} content={answer.pic} />
     </li>
   </ul>
 </div>
