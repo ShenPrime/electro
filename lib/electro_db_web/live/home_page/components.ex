@@ -18,5 +18,4 @@ defmodule ElectroDbWeb.HomePage.Components do
     <p id={"#{@column}-#{@id}"} class="m-1"><%= @content %></p>
     """
   end
-
 end

@@ -16,7 +16,7 @@ defmodule ElectroDbWeb.Router do
 
   scope "/", ElectroDbWeb do
     pipe_through :browser
-    
+
     get "/", PageController, :home
 
     live "/home", HomePageLive

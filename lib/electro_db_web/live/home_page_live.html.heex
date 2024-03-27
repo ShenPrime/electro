@@ -35,6 +35,12 @@
     search
   </button>
 </form>
+
+<form id="upload-form" phx-submit="save" phx-change="validate">
+  <.live_file_input upload={@uploads.answers_csv} />
+  <button type="submit">Upload</button>
+</form>
+
 <div :if={@loading} class="text-center">Loading...</div>
 <div :if={@no_results} class="text-center">No Results found!</div>
 <div :if={length(@answers) > 0}>
@@ -45,7 +51,7 @@
     </span>
     Results
   </h3>
-  <ul class="p-4">
+  <ul class="p-4 flex flex-col">
     <li
       :for={answer <- @answers}
       class="rounded-md shadow-lg border-solid flex flex-col justify-center content-center text-center bg-slate-950 p-4 m-4"
