@@ -6,15 +6,14 @@ config :electro_db, ElectroDb.Repo,
   hostname: "localhost",
   database: "electro_db_dev",
   port: 5432,
+  # username: System.get_env("DB_USERNAME"),
+  # password: System.get_env("DB_PASSWORD"),
+  # hostname: System.get_env("DB_HOSTNAME"),
+  # database: System.get_env("DB_NAME"),
+  # port: System.get_env("DB_PORT"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
-
-# username: System.get_env("DB_USERNAME"),
-# password: System.get_env("DB_PASSWORD"),
-# hostname: System.get_env("DB_HOSTNAME"),
-# database: System.get_env("DB_NAME"),
-# port: System.get_env("DB_PORT"),
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

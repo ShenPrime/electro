@@ -57,26 +57,52 @@
       class="rounded-md shadow-lg border-solid flex flex-col justify-center content-center text-center bg-slate-950 p-4 m-4"
     >
       <.copy_button
+        :if={answer.swedish_question}
         column="swedish_question"
         label="Swedish Question"
         id={answer.id}
         content={answer.swedish_question}
       />
       <.copy_button
+        :if={answer.arabic_translate}
         column="arabic_translate"
         label="Arabic Translate"
         id={answer.id}
         content={answer.arabic_translate}
       />
       <.copy_button
+        :if={answer.swedish_answer}
         column="swedish_answer"
         label="Swedish Answer"
         id={answer.id}
         content={answer.swedish_answer}
       />
-      <.copy_button column="subject" label="Subject" id={answer.id} content={answer.subject} />
-      <.copy_button column="note" label="Notes" id={answer.id} content={answer.note} />
-      <.copy_button column="pic" label="Image" id={answer.id} content={answer.pic} />
+
+      <.copy_button
+        :if={answer.arabic_answer}
+        column="arabic_answer"
+        label="Arabic Answer"
+        id={answer.id}
+        content={answer.arabic_answer}
+      />
+      <.copy_button
+        :if={answer.subject}
+        column="subject"
+        label="Subject"
+        id={answer.id}
+        content={answer.subject}
+      />
+      <.copy_button
+        :if={answer.note}
+        column="note"
+        label="Notes"
+        id={answer.id}
+        content={answer.note}
+      />
+      <div :if={answer.pic} >
+        <h2 class="font-bold text-sky-400">Image:</h2>
+        <img class="m-1" src={"https://electrodb.s3.eu-central-1.amazonaws.com/Pic/#{answer.pic}"} />
+      </div>
     </li>
   </ul>
 </div>

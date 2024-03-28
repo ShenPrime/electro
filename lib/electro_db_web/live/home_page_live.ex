@@ -112,6 +112,8 @@ defmodule ElectroDbWeb.HomePageLive do
     socket =
       put_flash(socket, :info, "Inserted: #{inserted}, errors: #{length(errors)}")
 
+    send(self(), :clear_flash)
+
     {:noreply,
      socket
      |> assign(:loading, false)
