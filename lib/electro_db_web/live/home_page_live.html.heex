@@ -31,7 +31,7 @@
     readonly={@loading}
     class="rounded-md shadow-md m-2 text-black"
   />
-  <button class="rounded-md self-center w-96 border border-solid p-2 m-2 bg-slate-950 hover:bg-slate-800">
+  <button class="rounded-md self-center w-96 p-2 m-2 bg-slate-950 hover:text-sky-400 hover:bg-slate-800">
     search
   </button>
 </form>
@@ -99,9 +99,12 @@
         id={answer.id}
         content={answer.note}
       />
-      <div :if={answer.pic} >
+      <div :if={answer.pic}>
         <h2 class="font-bold text-sky-400">Image:</h2>
-        <img class="m-1" src={"https://electrodb.s3.eu-central-1.amazonaws.com/Pic/#{answer.pic}"} />
+        <img
+          class="m-1"
+          src={"https://electrodb.s3.eu-central-1.amazonaws.com/Pic/#{answer.pic}"}
+        />
       </div>
     </li>
   </ul>
